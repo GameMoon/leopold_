@@ -1,12 +1,11 @@
 package szoftlab;
 
-public class Box extends Item{
+public class ZPM extends Item{
 	private int id;
-	public Box(int id){
+	public ZPM(int id){
 		this.id=id;
 	}
 	public int getID(){
 		return id;
 	}
-	public void death(){}
 }

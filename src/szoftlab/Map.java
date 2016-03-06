@@ -3,7 +3,7 @@ package szoftlab;
 import java.util.ArrayList;
 
 public class Map {
-	private ArrayList<Cell> cells = new ArrayList<>();
+	private ArrayList<Tile> cells = new ArrayList<>();
 	private int sizeX;
 	private int sizeY;
 	
