@@ -2,8 +2,7 @@ package szoftlab;
 
 public class Oneil extends Item{
 	private Box box;
-	private Bullet bullet;
-	private int scrore;
+	private int score;
 	private int maxscore;
 	private int direction;
 	public Oneil(int maxscore){ 
@@ -16,9 +15,9 @@ public class Oneil extends Item{
 		return direction;
 	}
 	public int getScore(){
-		return scrore;
+		return score;
 	}
 	public void death(){
-		
+		score = -1;
 	}
 }

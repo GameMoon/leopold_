@@ -8,6 +8,6 @@ public class PortalWall extends Wall{
 		this.direction = direction;
 		this.type = type;
 	}
-	public int enter(){ return 1;}
+	public int enter(int directon){ return 1;}
 	
 }

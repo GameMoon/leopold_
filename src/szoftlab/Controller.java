@@ -8,6 +8,7 @@ public class Controller {
 		player = new Oneil(3);
 	}
 	public void step(){
+		/* code */
 		if(player.getScore() == -1){
 			reset();
 		}

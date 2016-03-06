@@ -11,5 +11,5 @@ public class Door extends Tile{
 	public Door(){
 		status = false;
 	}
-	public int enter(){ return 1;}
+	public int enter(int directon){ return 1;}
 }
