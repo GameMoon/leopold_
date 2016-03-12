@@ -1,0 +1,18 @@
+portálátkelés
+portálnyitás
+doboz felszedés mérlegrõl
+doboz mérlegre tétele
+doboz felszed
+doboz lerak
+doboz szakadékba ejtése
+összes ZPM begyûjtése(új játék kezdõdik)
+lövés adott irányba
+mérlegre lépés
+lelépés mérlegrõl
+ládábaütközés
+ajtón átkelés
+falba ütközés
+zpm felvétel
+szakadékbalépés
+üres mezõre lépés
+
