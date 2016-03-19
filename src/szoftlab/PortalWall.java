@@ -2,7 +2,14 @@
 public class PortalWall extends Wall {
     private Wormhole wormhole;
     private Field field;
-    public void collide(Bullet b,Direction d){
 
+    public PortalWall(Field field,Wormhole wormhole){
+        this.field = field;
+        this.wormhole = wormhole;
+    }
+    public void collide(Bullet bullet,Direction dir){
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
+        wormhole.open(field,dir,bullet.isBlue);
     }
 }
+//10-12

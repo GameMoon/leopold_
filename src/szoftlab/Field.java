@@ -16,30 +16,31 @@ public class Field {
         else return neighbor[3];
     }
     public void add(Item item){
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
         items.add(item);
     }
     public void remove(Item item){
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
         items.remove(item);
     }
     public void enter(Colonel colonel, Item.Direction dir){
-        sequencetester.printMethod(
-                Thread.currentThread().getStackTrace()[1].getClassName(),
-                Thread.currentThread().getStackTrace()[1].getMethodName()
-        );
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
         for(Item currentItem : items){
             currentItem.collide(colonel,dir);
         }
         colonel.relocate(this);
     }
     public void enter(Bullet bullet, Item.Direction dir){
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
         for(Item currentItem : items){
             currentItem.collide(bullet,dir);
         }
+        bullet.relocate(this);
     }
     public void exit(Item item,Item.Direction dir){
-        sequencetester.printMethod(
-                Thread.currentThread().getStackTrace()[1].getClassName(),
-                Thread.currentThread().getStackTrace()[1].getMethodName()
-        );
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
+        for(Item currentItem : items){
+            currentItem.release();
+        }
     }
 }
