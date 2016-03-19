@@ -1,7 +1,3 @@
-package szoftlab;
 
-public class Wall extends Tile{
-	public int enter(){
-		return 0;
-	}
+public class Wall extends Item{
 }

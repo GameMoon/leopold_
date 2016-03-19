@@ -1,7 +1,10 @@
-package szoftlab;
 
-public abstract class Item {
-	public boolean hasScore(){ return true;}
-	public boolean isBlocking(){ return true;}
-	public void death(){}
+abstract public class Item {
+    protected enum Direction{
+        up,left,right,down
+    }
+    public void collide(Bullet bullet,Direction dir){}
+    public void collide(Colonel colonel,Direction dir){}
+    public void collide(Hand hand,Direction dir){}
+    public void release(){}
 }

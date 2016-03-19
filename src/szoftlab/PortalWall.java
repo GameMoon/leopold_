@@ -1,13 +1,8 @@
-package szoftlab;
 
-public class PortalWall extends Wall{
-	private int type;
-	private int direction;
-	
-	public void activate(int type,int direction){
-		this.direction = direction;
-		this.type = type;
-	}
-	public int enter(int directon){ return 1;}
-	
+public class PortalWall extends Wall {
+    private Wormhole wormhole;
+    private Field field;
+    public void collide(Bullet b,Direction d){
+
+    }
 }
