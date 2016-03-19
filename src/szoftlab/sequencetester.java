@@ -28,7 +28,7 @@ public class sequencetester {
         }
     }
     public static void printMethod(String object,String methodName){
-        System.out.println(object+":"+methodName);
+        //System.out.println(object+":"+methodName);
         if(calls.containsKey(object)){
            for(int k = 0;k<calls.get(object);k++) System.out.print("\t");
         }
