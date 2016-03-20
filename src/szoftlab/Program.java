@@ -8,7 +8,7 @@ public class Program {
 
     public Program(){
        initMap();
-       oneil = new Colonel(map[0][0],Item.Direction.down);
+       oneil = new Colonel(map[0][0],Item.Direction.down,10);
     }
     private void initMap(){
         //Generate fields

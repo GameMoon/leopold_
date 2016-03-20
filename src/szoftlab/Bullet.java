@@ -3,13 +3,10 @@ public class Bullet extends Moving{
     public boolean isBlue;
 
     public Bullet(Field currentPos,Direction dir,boolean isBlue){
-        this.isBlue = isBlue;
-        create(currentPos,dir);
-    }
-    private void create(Field currentPos,Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
         this.currentPos = currentPos;
         this.dir = dir;
+        this.isBlue = isBlue;
         step();
     }
     public void step(){

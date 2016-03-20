@@ -10,8 +10,24 @@ public class Wormhole {
     public void open(Field field,Item.Direction dir,boolean isBlue){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
 
-        if(isBlue && bluePortal == null) bluePortal = new Portal(field,isBlue,calculateDir(dir),this);
-        else if(!isBlue && orangePortal == null) orangePortal = new Portal(field,isBlue,calculateDir(dir),this);
+        if(isBlue){
+            if(bluePortal != null){
+                bluePortal.close();
+                bluePortal = null;
+            }
+            bluePortal = new Portal(field,isBlue,calculateDir(dir),this);
+            bluePortal.open();
+        }
+        else{
+            if(orangePortal != null){
+                orangePortal.close();
+                orangePortal = null;
+            }
+            orangePortal = new Portal(field,isBlue,calculateDir(dir),this);
+            orangePortal.open();
+        }
+
+
     }
     private Item.Direction calculateDir(Item.Direction bulletDir){
         if(bulletDir == Item.Direction.down) return Item.Direction.up;
@@ -19,7 +35,22 @@ public class Wormhole {
         else if(bulletDir == Item.Direction.left) return Item.Direction.right;
         else return Item.Direction.down;
     }
-    public void transport(){
+    public void transport(Portal portal,Colonel colonel, Item.Direction dir){
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
+        if(bluePortal != null && orangePortal != null && dir == calculateDir(portal.dir)){
+            colonel.setBlocked(false);
+            if(portal == bluePortal){
+                colonel.currentPos.exit(colonel,dir);
+                colonel.rotate(orangePortal.dir);
+                orangePortal.field.getNeighbor(colonel.dir).enter(colonel, colonel.dir);
+            }
+            else if(portal == orangePortal){
+                colonel.currentPos.exit(colonel,dir);
+                colonel.rotate(bluePortal.dir);
+                bluePortal.field.getNeighbor(colonel.dir).enter(colonel,colonel.dir);
+            }
+            colonel.setBlocked(true);
+        }
 
     }
 }

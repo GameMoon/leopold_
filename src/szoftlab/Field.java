@@ -32,15 +32,21 @@ public class Field {
     }
     public void enter(Bullet bullet, Item.Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
-        for(Item currentItem : items){
-            currentItem.collide(bullet,dir);
+        for(int k = 0;k<items.size();k++){
+            items.get(k).collide(bullet,dir);
         }
         bullet.relocate(this);
     }
+    public void enter(Hand hand, Item.Direction dir){
+        sequencetester.printMethod(Thread.currentThread().getStackTrace());
+        for(int k = 0;k<items.size();k++){
+            items.get(k).collide(hand,dir);
+        }
+    }
     public void exit(Item item,Item.Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
-        for(Item currentItem : items){
-            currentItem.release();
+        for(int k = 0;k<items.size();k++){
+            items.get(k).release();
         }
     }
 }

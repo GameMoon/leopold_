@@ -10,6 +10,7 @@ public class PortalWall extends Wall {
     public void collide(Bullet bullet,Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
         wormhole.open(field,dir,bullet.isBlue);
+        bullet.setBlocked(true);
     }
 }
 //10-12

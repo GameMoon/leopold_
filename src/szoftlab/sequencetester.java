@@ -15,8 +15,12 @@ public class sequencetester {
         game = new Program();
         System.out.println("Number of seqdiagram?");
         BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
-        int number = 0;
-
+        int number = 12;
+        try {
+            number = Integer.parseInt(bfr.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //Seqdiagram
         if(number == 0){
             canPrint = true;
@@ -52,37 +56,96 @@ public class sequencetester {
             openPortal();
             game.oneil.shoot();
         }
+        else if(number == 8){ //crossPortal
+            crossPortal();
+            game.oneil.step();
+        }
+        else if(number == 9){ // step into the rift
+            rift();
+            game.oneil.step();
+        }
+        else if(number == 10){ //pickup Box
+            pickUp();
+            game.oneil.pickUp();
+        }
+        else if(number == 11){ //putdown Box
+            putDown();
+            game.oneil.putDown();
+        }
+        else if(number == 12){ //pickup ZPM
+            pickUpZPM();
+            game.oneil.step();
+        }
     }
     public static void printMethod(StackTraceElement[] elements){
+
         String fromMethod = elements[2].getMethodName();
         String methodName = elements[1].getMethodName();
+        String className = elements[1].getClassName();
+        String fromMethod2 = elements[3].getMethodName();
+
+        String fromKey = fromMethod + fromMethod2;
+        String key = methodName + fromMethod;
+
         if(!canPrint) return;
-        if(calls.containsKey(fromMethod)){
-           for(int k = 0;k<calls.get(fromMethod);k++) System.out.print("\t");
-            if(!calls.containsKey(methodName)){
-                calls.put(methodName,calls.get(fromMethod)+1);
+        if(calls.containsKey(fromKey)){
+           for(int k = 0;k<calls.get(fromKey);k++) System.out.print("\t");
+            if(!calls.containsKey(key)){
+                calls.put(key,calls.get(fromKey)+1);
             }
         }
         else{
             tabindex++;
-            calls.put(methodName,tabindex);
+            calls.put(key,tabindex);
         }
-        System.out.println(methodName+"()");
+        System.out.print(methodName+"()");
+        System.out.println(" | "+"Class: "+className);
     }
-    public static void openPortal(){
+    private static void pickUpZPM(){
+        game.getMap()[0][1].add(new ZPM());
         canPrint = true;
     }
-    public static void shoot(){
+    private static void putDown(){
+        game.getMap()[0][1].add(new Box());
+        game.oneil.pickUp();
+        canPrint = true;
+    }
+    private static void pickUp(){
+        game.getMap()[0][1].add(new Box());
+        canPrint = true;
+    }
+    private static void rift(){
+        game.getMap()[0][1].add(new Rift());
+        canPrint = true;
+    }
+    private static void crossPortal(){
+
+        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.wormhole));
+        game.getMap()[2][0].add(new PortalWall(game.getMap()[2][0], game.wormhole));
+
+        game.oneil.shoot();
+        game.oneil.changeColor();
+        game.oneil.rotate(Item.Direction.right);
+        game.oneil.shoot();
+        game.oneil.rotate(Item.Direction.down);
+
+        canPrint = true;
+    }
+    private static void openPortal(){
+        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.wormhole));
+        canPrint = true;
+    }
+    private static void shoot(){
         game.getMap()[0][4].add(new Wall());
         canPrint = true;
     }
-    public static void openDoor(){
+    private static void openDoor(){
         Door door = new Door();
         door.open();
         game.getMap()[0][1].add(door);
         canPrint = true;
     }
-    public static void closedDoor(){
+    private static void closedDoor(){
         Door door = new Door();
         door.close();
         game.getMap()[0][1].add(door);
