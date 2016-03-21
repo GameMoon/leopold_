@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class Moving extends Item{
     protected Field currentPos;

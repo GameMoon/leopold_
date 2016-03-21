@@ -1,3 +1,5 @@
+package szoftlab;
+
 import java.util.ArrayList;
 
 public class Field {

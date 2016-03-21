@@ -1,3 +1,4 @@
+package szoftlab;
 
 abstract public class Item {
     protected enum Direction{

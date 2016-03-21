@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class Colonel extends Moving {
     public Bullet bullet;

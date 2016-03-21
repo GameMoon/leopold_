@@ -1,3 +1,5 @@
+package szoftlab;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -82,8 +84,10 @@ public class sequencetester {
         String fromMethod = elements[2].getMethodName();
         String methodName = elements[1].getMethodName();
         String className = elements[1].getClassName();
-        String fromMethod2 = elements[3].getMethodName();
-
+        String fromMethod2 = null ;
+        if(elements.length < 4) fromMethod2 = "main";
+        else fromMethod2 = elements[3].getMethodName();
+        
         String fromKey = fromMethod + fromMethod2;
         String key = methodName + fromMethod;
 

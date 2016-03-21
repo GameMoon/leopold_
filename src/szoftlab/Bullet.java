@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class Bullet extends Moving{
     public boolean isBlue;

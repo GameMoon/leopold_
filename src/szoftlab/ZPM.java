@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class ZPM extends Item{
     public void collide(Colonel colonel,Direction dir){

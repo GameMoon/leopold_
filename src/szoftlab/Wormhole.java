@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class Wormhole {
     private Portal bluePortal;

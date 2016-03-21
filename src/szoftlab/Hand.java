@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class Hand extends Item{
     private Box box;

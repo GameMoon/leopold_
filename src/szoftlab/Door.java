@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class Door extends Item{
     private boolean status = true;

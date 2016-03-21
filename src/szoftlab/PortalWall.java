@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class PortalWall extends Wall {
     private Wormhole wormhole;

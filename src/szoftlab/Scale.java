@@ -1,3 +1,4 @@
+package szoftlab;
 
 public class Scale extends Item {
     private Door door;
