@@ -27,28 +27,28 @@ public class Field {
     }
     public void enter(Colonel colonel, Item.Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
-        for(Item currentItem : items){
-            currentItem.collide(colonel,dir);
+        for(int k = 0;k<items.size();k++){
+           if(items.get(k) != null) items.get(k).collide(colonel,dir);
         }
         colonel.relocate(this);
     }
     public void enter(Bullet bullet, Item.Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
         for(int k = 0;k<items.size();k++){
-            items.get(k).collide(bullet,dir);
+            if(items.get(k) != null) items.get(k).collide(bullet,dir);
         }
         bullet.relocate(this);
     }
     public void enter(Hand hand, Item.Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
         for(int k = 0;k<items.size();k++){
-            items.get(k).collide(hand,dir);
+            if(items.get(k) != null) items.get(k).collide(hand,dir);
         }
     }
     public void exit(Item item,Item.Direction dir){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
         for(int k = 0;k<items.size();k++){
-            items.get(k).release();
+            if(items.get(k) != null) items.get(k).release();
         }
     }
 }

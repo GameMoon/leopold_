@@ -39,7 +39,7 @@ public class Colonel extends Moving {
     }
     public void die(){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());
-        hand.free().destroy();
+        if(hand.free() != null) hand.free().destroy();
     }
     public void addScore(ZPM zpm){
         sequencetester.printMethod(Thread.currentThread().getStackTrace());

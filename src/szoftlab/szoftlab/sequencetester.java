@@ -15,7 +15,21 @@ public class sequencetester {
     public static void main(String[] args){
 
         game = new Program();
+
+        System.out.println("1. Oneil step");
+        System.out.println("2. Oneil pressing the Scale");
+        System.out.println("3. Oneil releasing the Scale");
+        System.out.println("4. Oneil going cross the Door");
+        System.out.println("5. Oneil blocked by the Door");
+        System.out.println("6. Oneil shoot");
+        System.out.println("7. Portal open");
+        System.out.println("8. Crossing portal");
+        System.out.println("9. step into the rift");
+        System.out.println("10. pickUp Box");
+        System.out.println("11. putDown Box");
+        System.out.println("12. pickUp ZPM");
         System.out.println("Number of seqdiagram?");
+        
         BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
         int number = 12;
         try {
