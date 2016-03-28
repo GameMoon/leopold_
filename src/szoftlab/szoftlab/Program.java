@@ -28,5 +28,12 @@ public class Program {
             }
         }
     }
+    public void clearMap(){
+        for(int posX = 0;posX<mapSizeX;posX++){
+            for(int posY =0;posY<mapSizeY;posY++) {
+                map[posX][posY].clearItems();
+            }
+        }
+    }
     public Field[][] getMap(){ return map;}
 }
