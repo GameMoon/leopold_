@@ -7,10 +7,10 @@ public class Moving extends Item{
 
     public void setBlocked(boolean status){
         blocked = status;
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),status);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), status);
     }
     public void relocate(Field newField){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),newField);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), newField);
         if(!blocked){
             currentPos.remove(this);
             currentPos = newField;
@@ -19,7 +19,7 @@ public class Moving extends Item{
     }
     public void rotate(Direction dir){
         this.dir = dir;
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),dir);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), dir);
     }
     public void step(){}
 }

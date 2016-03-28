@@ -9,7 +9,7 @@ public class Wormhole {
         orangePortal = null;
     }
     public void open(Field field,Item.Direction dir,boolean isBlue){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),field,dir,isBlue);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), field, dir, isBlue);
 
         if(isBlue){
             if(bluePortal != null){
@@ -37,7 +37,7 @@ public class Wormhole {
         else return Item.Direction.down;
     }
     public void transport(Portal portal,Colonel colonel, Item.Direction dir){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),portal,colonel,dir);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), portal, colonel, dir);
         if(bluePortal != null && orangePortal != null && dir == calculateDir(portal.dir)){
             colonel.setBlocked(false);
             if(portal == bluePortal){

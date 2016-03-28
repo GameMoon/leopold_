@@ -21,42 +21,42 @@ public class Field {
         else return neighbor[3];
     }
     public void add(Item item){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),item);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), item);
         items.add(item);
     }
     public void remove(Item item){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),item);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), item);
         items.remove(item);
     }
     public void enter(Colonel colonel, Item.Direction dir){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),colonel,dir);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), colonel, dir);
         for(int k = 0;k<items.size();k++){
            if(items.get(k) != null) items.get(k).collide(colonel,dir);
         }
         colonel.relocate(this);
     }
     public void enter(Bullet bullet, Item.Direction dir){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),bullet,dir);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), bullet, dir);
         for(int k = 0;k<items.size();k++){
             if(items.get(k) != null) items.get(k).collide(bullet,dir);
         }
         bullet.relocate(this);
     }
     public void enter(Hand hand, Item.Direction dir){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),hand,dir);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), hand, dir);
         for(int k = 0;k<items.size();k++){
             if(items.get(k) != null) items.get(k).collide(hand,dir);
         }
     }
     public void enter(Box box, Item.Direction dir){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),box,dir);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), box, dir);
         this.add(box);
         for(int k = 0;k<items.size();k++){
             if(items.get(k) != null) items.get(k).collide(box,dir);
         }
     }
     public void exit(Item item,Item.Direction dir){
-        sequencetester.printMethod(this,Thread.currentThread().getStackTrace(),item,dir);
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), item, dir);
         for(int k = 0;k<items.size();k++){
             if(items.get(k) != null) items.get(k).release();
         }

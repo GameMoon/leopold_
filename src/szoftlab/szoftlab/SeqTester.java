@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class sequencetester {
+public class SeqTester {
     public static Map<Integer,String> classNames = new HashMap<>();
     public static Map<String,Integer> calls = new HashMap<>();
     public static int tabindex = 0;
