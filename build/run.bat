@@ -5,4 +5,7 @@ javac -d bin ../src/szoftlab/szoftlab/*.java
 :RUN
 java -cp bin szoftlab.SeqTester
 pause
+cls
+GOTO RUN
+
 
