@@ -1,0 +1,11 @@
+Következõ leadandó:
+Tesztek lefuttatása
+két hét múlva kell leadni , nem lesz konzi jovõhéten.
+eleje: fájlista, fordítás, futtatás, (szöveg is legyen), 
+10.2 Tesztek jegyzõkönyve
+Sikeres--sikertelen
+A sikertelen is kell(ahányszor nem sikerült) -> bele kell írni a táblázatba
+Minden egyes tesztesetre: Teszt ideje, tesztelõje, kimenete, hiba oka ->miket kell változtatni, tesztfájl hibája is hiba.
+A lényeg, hogy a végén jól fusson, úgyse megy elsõre.-> nem hihetõ
+értékelés : teljes félévre: Ki hány százalékot dolgozott?
+
