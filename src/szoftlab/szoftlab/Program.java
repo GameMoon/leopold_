@@ -9,7 +9,7 @@ public class Program {
 
     public Program(){
        initMap();
-       oneil = new Colonel(map[0][0],Item.Direction.down,10);
+       oneil = new Colonel(map[0][0],Item.Direction.down,10,10);
     }
     private void initMap(){
         //Generate fields
@@ -35,5 +35,9 @@ public class Program {
             }
         }
     }
+    //ÚJ ZPM létrehozása
+    public void createRandomZPM(){
+    	//Macht etwas
+    };
     public Field[][] getMap(){ return map;}
 }

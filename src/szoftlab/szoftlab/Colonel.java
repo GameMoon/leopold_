@@ -7,12 +7,13 @@ public class Colonel extends Moving {
     private boolean isBlue;
     private Hand hand;
 
-    public Colonel(Field field,Direction dir,int numberOfZPM){
+    public Colonel(Field field,Direction dir,int numberOfZPM,int w){
         this.currentPos = field;
         this.dir = dir;
         isBlue = false;
         maxscore = numberOfZPM;
         hand = new Hand(this);
+        weight=w;
     }
     public void shoot(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
@@ -44,6 +45,10 @@ public class Colonel extends Moving {
     public void addScore(ZPM zpm){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), zpm);
         score++;
+        //Új ZPM keletkezik, ha felvesz két ZPM-et
+        if(score%2==0){
+        // Macht etwas....
+        }
         if(score == maxscore) win();
         currentPos.remove(zpm);
     }

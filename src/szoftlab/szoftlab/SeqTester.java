@@ -162,12 +162,12 @@ public class SeqTester {
         canPrint = true;
     }
     private static void putDown(){
-        game.getMap()[0][1].add(new Box());
+        game.getMap()[0][1].add(new Box(10));
         game.oneil.pickUp();
         canPrint = true;
     }
     private static void pickUp(){
-        game.getMap()[0][1].add(new Box());
+        game.getMap()[0][1].add(new Box(10));
         canPrint = true;
     }
     private static void rift(){
@@ -177,7 +177,7 @@ public class SeqTester {
     private static void riftwithBox(){
         game.getMap()[0][1].add(new Rift());
         game.oneil.rotate(Item.Direction.right);
-        game.getMap()[1][0].add(new Box());
+        game.getMap()[1][0].add(new Box(10));
         game.oneil.pickUp();
         game.oneil.rotate(Item.Direction.down);
         canPrint = true;
@@ -214,8 +214,8 @@ public class SeqTester {
         canPrint = true;
     }
     private static void putDownItemtoScale(){
-        game.getMap()[0][1].add(new Box());
-        game.getMap()[1][0].add(new Scale(new Door()));
+        game.getMap()[0][1].add(new Box(10));
+        game.getMap()[1][0].add(new Scale(new Door(),20));
         game.oneil.pickUp();
         game.oneil.rotate(Item.Direction.right);
         canPrint = true;
@@ -227,11 +227,11 @@ public class SeqTester {
         canPrint = true;
     }
     private static void pressScale(){
-        game.getMap()[0][1].add(new Scale(new Door()));
+        game.getMap()[0][1].add(new Scale(new Door(),20));
         canPrint = true;
     }
     private static void releaseScale(){
-        game.getMap()[0][0].add(new Scale(new Door()));
+        game.getMap()[0][0].add(new Scale(new Door(),20));
         canPrint = true;
     }
     private static void flyingBullet(){

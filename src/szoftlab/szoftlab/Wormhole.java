@@ -1,31 +1,31 @@
 package szoftlab;
 
 public class Wormhole {
-    private Portal bluePortal;
-    private Portal orangePortal;
+    private Portal firstPortal;
+    private Portal secondPortal;
 
     public Wormhole(){
-        bluePortal = null;
-        orangePortal = null;
+        firstPortal = null;
+        secondPortal = null;
     }
     public void open(Field field,Item.Direction dir,boolean isBlue){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), field, dir, isBlue);
 
         if(isBlue){
-            if(bluePortal != null){
-                bluePortal.close();
-                bluePortal = null;
+            if(firstPortal != null){
+                firstPortal.close();
+                secondPortal = null;
             }
-            bluePortal = new Portal(field,isBlue,calculateDir(dir),this);
-            bluePortal.open();
+            firstPortal = new Portal(field,isBlue,calculateDir(dir),this);
+            secondPortal.open();
         }
         else{
-            if(orangePortal != null){
-                orangePortal.close();
-                orangePortal = null;
+            if(secondPortal != null){
+                secondPortal.close();
+                secondPortal = null;
             }
-            orangePortal = new Portal(field,isBlue,calculateDir(dir),this);
-            orangePortal.open();
+            secondPortal = new Portal(field,isBlue,calculateDir(dir),this);
+            secondPortal.open();
         }
 
 
@@ -38,17 +38,17 @@ public class Wormhole {
     }
     public void transport(Portal portal,Colonel colonel, Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), portal, colonel, dir);
-        if(bluePortal != null && orangePortal != null && dir == calculateDir(portal.dir)){
+        if(firstPortal != null && secondPortal != null && dir == calculateDir(portal.dir)){
             colonel.setBlocked(false);
-            if(portal == bluePortal){
+            if(portal == firstPortal){
                 //colonel.currentPos.exit(colonel,dir);
-                colonel.rotate(orangePortal.dir);
-                orangePortal.field.getNeighbor(colonel.dir).enter(colonel, colonel.dir);
+                colonel.rotate(secondPortal.dir);
+                secondPortal.field.getNeighbor(colonel.dir).enter(colonel, colonel.dir);
             }
-            else if(portal == orangePortal){
+            else if(portal == secondPortal){
                // colonel.currentPos.exit(colonel,dir);
-                colonel.rotate(bluePortal.dir);
-                bluePortal.field.getNeighbor(colonel.dir).enter(colonel,colonel.dir);
+                colonel.rotate(firstPortal.dir);
+                secondPortal.field.getNeighbor(colonel.dir).enter(colonel,colonel.dir);
             }
             colonel.setBlocked(true);
         }
