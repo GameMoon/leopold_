@@ -6,18 +6,20 @@ public class Colonel extends Moving {
     private int maxscore;
     private boolean isBlue;
     private Hand hand;
-
-    public Colonel(Field field,Direction dir,int numberOfZPM,int w){
+    Wormhole worm;
+    
+    public Colonel(Field field,Direction dir,int numberOfZPM,int w,Wormhole worm){
         this.currentPos = field;
         this.dir = dir;
         isBlue = false;
         maxscore = numberOfZPM;
         hand = new Hand(this);
         weight=w;
+        this.worm=worm;
     }
     public void shoot(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
-        bullet = new Bullet(currentPos,dir,isBlue);
+        bullet = new Bullet(currentPos,dir,isBlue,worm);
     }
     public void step(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());

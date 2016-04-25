@@ -55,7 +55,7 @@ public class SeqTester {
         else return classNames.get(ID)+":"+className.getSimpleName();
     }
 
-    public static void main(String[] args){
+    public void init(){
 
         game = new Program();
 
@@ -162,12 +162,12 @@ public class SeqTester {
         canPrint = true;
     }
     private static void putDown(){
-        game.getMap()[0][1].add(new Box(10));
+        game.getMap()[0][1].add(new Box(10,game.map[0][1]));
         game.oneil.pickUp();
         canPrint = true;
     }
     private static void pickUp(){
-        game.getMap()[0][1].add(new Box(10));
+        game.getMap()[0][1].add(new Box(10,game.map[0][1]));
         canPrint = true;
     }
     private static void rift(){
@@ -177,15 +177,15 @@ public class SeqTester {
     private static void riftwithBox(){
         game.getMap()[0][1].add(new Rift());
         game.oneil.rotate(Item.Direction.right);
-        game.getMap()[1][0].add(new Box(10));
+        game.getMap()[1][0].add(new Box(10,game.map[1][0]));
         game.oneil.pickUp();
         game.oneil.rotate(Item.Direction.down);
         canPrint = true;
     }
     private static void crossPortal(){
 
-        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.wormhole));
-        game.getMap()[2][0].add(new PortalWall(game.getMap()[2][0], game.wormhole));
+        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1]));
+        game.getMap()[2][0].add(new PortalWall(game.getMap()[2][0]));
 
         game.oneil.shoot();
         game.oneil.changeColor();
@@ -196,7 +196,7 @@ public class SeqTester {
         canPrint = true;
     }
     private static void openPortal(){
-        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.wormhole));
+        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1]));
         canPrint = true;
     }
     private static void wall(){
@@ -214,8 +214,8 @@ public class SeqTester {
         canPrint = true;
     }
     private static void putDownItemtoScale(){
-        game.getMap()[0][1].add(new Box(10));
-        game.getMap()[1][0].add(new Scale(new Door(),20));
+        game.getMap()[0][1].add(new Box(10,game.map[0][1]));
+        game.getMap()[1][0].add(new Scale(20));
         game.oneil.pickUp();
         game.oneil.rotate(Item.Direction.right);
         canPrint = true;
@@ -227,11 +227,11 @@ public class SeqTester {
         canPrint = true;
     }
     private static void pressScale(){
-        game.getMap()[0][1].add(new Scale(new Door(),20));
+        game.getMap()[0][1].add(new Scale(20));
         canPrint = true;
     }
     private static void releaseScale(){
-        game.getMap()[0][0].add(new Scale(new Door(),20));
+        game.getMap()[0][0].add(new Scale(20));
         canPrint = true;
     }
     private static void flyingBullet(){

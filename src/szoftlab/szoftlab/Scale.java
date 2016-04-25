@@ -3,9 +3,8 @@ package szoftlab;
 public class Scale extends Item {
     private Door door;
     private int minWeight;
-    private int currentWeight;
-    public Scale(Door door,int min){
-        this.door = door;
+    private int currentWeight=0;
+    public Scale(int min){
         this.minWeight=min;
     }
     public void collide(Colonel colonel,Direction dir){
@@ -30,4 +29,8 @@ public class Scale extends Item {
         	 door.close();
         }     
     }
+    public void setDoor(Door door){
+    	this.door=door;
+    }
+    
 }

@@ -1,11 +1,14 @@
 package szoftlab;
 
 public class Box extends Item{
-    public void destroy(){
+	Field startPos;
+	Field currentPos;
+	public void destroy(){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
     }
-    public Box(int w ){
+    public Box(int w,Field f ){
     	weight=w;
+    	startPos=currentPos=f;
     }
     public void collide(Hand hand,Direction dir){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), hand, dir);

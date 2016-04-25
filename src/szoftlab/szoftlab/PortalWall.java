@@ -1,16 +1,14 @@
 package szoftlab;
 
 public class PortalWall extends Wall {
-    private Wormhole wormhole;
     private Field field;
 
-    public PortalWall(Field field,Wormhole wormhole){
+    public PortalWall(Field field){
         this.field = field;
-        this.wormhole = wormhole;
     }
     public void collide(Bullet bullet,Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), bullet, dir);
-        wormhole.open(field,dir,bullet.isBlue);
+        bullet.getWormhole().open(field, dir); //dir ellentétes
         bullet.setBlocked(true);
     }
 }

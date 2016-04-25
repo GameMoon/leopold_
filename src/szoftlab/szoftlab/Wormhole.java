@@ -3,20 +3,20 @@ package szoftlab;
 public class Wormhole {
     private Portal firstPortal;
     private Portal secondPortal;
-
+    private boolean isFirstColor=true;
     public Wormhole(){
         firstPortal = null;
         secondPortal = null;
     }
-    public void open(Field field,Item.Direction dir,boolean isBlue){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), field, dir, isBlue);
+    public void open(Field field,Item.Direction dir){
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), field, dir, isFirstColor);
 
-        if(isBlue){
+        if(isFirstColor){
             if(firstPortal != null){
                 firstPortal.close();
                 secondPortal = null;
             }
-            firstPortal = new Portal(field,isBlue,calculateDir(dir),this);
+            firstPortal = new Portal(field,isFirstColor,calculateDir(dir),this);
             secondPortal.open();
         }
         else{
@@ -24,7 +24,7 @@ public class Wormhole {
                 secondPortal.close();
                 secondPortal = null;
             }
-            secondPortal = new Portal(field,isBlue,calculateDir(dir),this);
+            secondPortal = new Portal(field,isFirstColor,calculateDir(dir),this);
             secondPortal.open();
         }
 
@@ -54,4 +54,5 @@ public class Wormhole {
         }
 
     }
+    public void changeColor(){isFirstColor=!isFirstColor;}
 }
