@@ -10,5 +10,6 @@ abstract public class Item {
     public void collide(Colonel colonel,Direction dir){}
     public void collide(Hand hand,Direction dir){}
     public void collide(Box box,Direction dir){}
+    public void collide(Replikator rep,Direction dir){}
     public void release(Item i){}
 }

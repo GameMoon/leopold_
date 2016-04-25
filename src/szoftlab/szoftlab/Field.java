@@ -55,6 +55,12 @@ public class Field {
             if(items.get(k) != null) items.get(k).collide(box,dir);
         }
     }
+    public void enter(Replikator rep, Item.Direction dir){
+        for(int k = 0;k<items.size();k++){
+            if(items.get(k) != null) items.get(k).collide(rep,dir);
+        }
+        rep.relocate(this);
+    }
     public void exit(Item item,Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), item, dir);
         for(int k = 0;k<items.size();k++){

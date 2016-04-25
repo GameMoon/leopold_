@@ -6,4 +6,7 @@ public class Rift extends Item{
        colonel.setBlocked(true);
        colonel.die();
     }
+    public void collide(Replikator replikator,Direction dir){
+        replikator.die(this);
+    }
 }

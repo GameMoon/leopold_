@@ -10,6 +10,7 @@ public class Hand extends Item{
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         if(box != null){
             box.destroy();
+            box = null;
         }
     }
     public void grab(Box box){
@@ -21,5 +22,9 @@ public class Hand extends Item{
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         colonel.currentPos.getNeighbor(colonel.dir).enter(box, colonel.dir);
         return box;
+    }
+    public boolean hasBox(){
+        if(box != null) return true;
+        else return false;
     }
 }
