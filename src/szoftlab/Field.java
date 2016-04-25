@@ -58,7 +58,7 @@ public class Field {
     public void exit(Item item,Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), item, dir);
         for(int k = 0;k<items.size();k++){
-            if(items.get(k) != null) items.get(k).release();
+            if(items.get(k) != null) items.get(k).release(item);
         }
     }
 }

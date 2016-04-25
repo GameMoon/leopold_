@@ -46,7 +46,7 @@ public class Colonel extends Moving {
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), zpm);
         score++;
         //Új ZPM keletkezik, ha felvesz két ZPM-et
-        if(score%2==0 ){
+        if(score%2==0){
         // Macht etwas....
         }
         if(score == maxscore) win();
