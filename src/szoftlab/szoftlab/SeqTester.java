@@ -55,7 +55,7 @@ public class SeqTester {
         else return classNames.get(ID)+":"+className.getSimpleName();
     }
 
-    public static void main(String[] args){
+    public void test(String[] args){
 
         game = new Program();
 
@@ -184,8 +184,8 @@ public class SeqTester {
     }
     private static void crossPortal(){
 
-        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.wormhole));
-        game.getMap()[2][0].add(new PortalWall(game.getMap()[2][0], game.wormhole));
+        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.oneilWormhole));
+        game.getMap()[2][0].add(new PortalWall(game.getMap()[2][0], game.oneilWormhole));
 
         game.oneil.shoot();
         game.oneil.changeColor();
@@ -196,7 +196,7 @@ public class SeqTester {
         canPrint = true;
     }
     private static void openPortal(){
-        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.wormhole));
+        game.getMap()[0][1].add(new PortalWall(game.getMap()[0][1],game.oneilWormhole));
         canPrint = true;
     }
     private static void wall(){
