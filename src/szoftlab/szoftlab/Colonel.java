@@ -51,7 +51,7 @@ public class Colonel extends Moving {
         score++;
         //�j ZPM keletkezik, ha felvesz k�t ZPM-et
         if(score%2==0){
-        // Macht etwas....
+            map.createRandomZPM();
         }
         if(score == maxscore) win();
         currentPos.remove(zpm);

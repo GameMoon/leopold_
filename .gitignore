@@ -3,4 +3,5 @@
 *.log
 *.class
 *.jar
+*.txt
 bin/

@@ -68,7 +68,9 @@ public class Field {
             if(items.get(k) != null) items.get(k).release(item);
         }
     }
-    
+    public ArrayList<Item> getItems(){
+        return items;
+    }
     public String getItemsString()
     {
     	String re = "";

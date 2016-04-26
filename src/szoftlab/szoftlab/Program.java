@@ -4,6 +4,7 @@ package szoftlab;
 import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import szoftlab.Item.Direction;
 
@@ -254,7 +255,16 @@ public class Program {
     }
     //�J ZPM l�trehoz�sa
     public void createRandomZPM(){
-    	//Macht etwas
+    	Random rdm = new Random();
+        int x = rdm.nextInt(mapSizeX-1);
+        int y = rdm.nextInt(mapSizeY-1);
+        Field field = map[x][y];
+        while(field.getItems().size() != 0){
+            x = rdm.nextInt(mapSizeX-1);
+            y = rdm.nextInt(mapSizeY-1);
+           field = map[x][y];
+       }
+        field.add(new ZPM());
     };
     public Field[][] getMap(){ return map;}
     public static void main(String[] args){
