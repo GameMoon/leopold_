@@ -1,12 +1,18 @@
 package szoftlab;
 
+import java.awt.Color;
+
 public class Wormhole {
     private Portal firstPortal;
     private Portal secondPortal;
     private boolean isFirstColor=true;
-    public Wormhole(){
+    private Color firstColor;
+    private Color secondColor;
+    public Wormhole(Color first, Color second){
         firstPortal = null;
         secondPortal = null;
+        firstColor = first;
+        secondColor = second;
     }
     public void open(Field field,Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), field, dir, isFirstColor);
@@ -14,20 +20,18 @@ public class Wormhole {
         if(isFirstColor){
             if(firstPortal != null){
                 firstPortal.close();
-                secondPortal = null;
             }
-            firstPortal = new Portal(field,isFirstColor,calculateDir(dir),this);
-            secondPortal.open();
+            firstPortal = new Portal(field,isFirstColor,calculateDir(dir),this, firstColor);
+            firstPortal.open();
         }
         else{
             if(secondPortal != null){
                 secondPortal.close();
-                secondPortal = null;
             }
-            secondPortal = new Portal(field,isFirstColor,calculateDir(dir),this);
+            secondPortal = new Portal(field,isFirstColor,calculateDir(dir),this, secondColor);
             secondPortal.open();
         }
-
+        
 
     }
     private Item.Direction calculateDir(Item.Direction bulletDir){
@@ -36,19 +40,15 @@ public class Wormhole {
         else if(bulletDir == Item.Direction.left) return Item.Direction.right;
         else return Item.Direction.down;
     }
-    public void transport(Portal portal,Colonel colonel, Item.Direction dir){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), portal, colonel, dir);
-        if(firstPortal != null && secondPortal != null && dir == calculateDir(portal.dir)){
+    public void transport(Portal from,Colonel colonel, Item.Direction dir){
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), from, colonel, dir);
+        if(firstPortal != null && secondPortal != null){
             colonel.setBlocked(false);
-            if(portal == firstPortal){
-                //colonel.currentPos.exit(colonel,dir);
-                colonel.rotate(secondPortal.dir);
-                secondPortal.field.getNeighbor(colonel.dir).enter(colonel, colonel.dir);
+            if(from == firstPortal){
+            	secondPortal.exit(colonel);
             }
-            else if(portal == secondPortal){
-               // colonel.currentPos.exit(colonel,dir);
-                colonel.rotate(firstPortal.dir);
-                secondPortal.field.getNeighbor(colonel.dir).enter(colonel,colonel.dir);
+            else if(from == secondPortal){
+            	firstPortal.exit(colonel);
             }
             colonel.setBlocked(true);
         }

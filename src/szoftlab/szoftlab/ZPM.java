@@ -5,4 +5,9 @@ public class ZPM extends Item{
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), colonel, dir);
         colonel.addScore(this);
     }
+    @Override
+    public String debugString() {
+    	
+    	return "Z";
+    }
 }

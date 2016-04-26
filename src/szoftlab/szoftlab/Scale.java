@@ -32,5 +32,9 @@ public class Scale extends Item {
     public void setDoor(Door door){
     	this.door=door;
     }
-    
+    @Override
+    public String debugString() {
+    	
+    	return "-<"+door.Getserialnumber()+">";
+    }
 }

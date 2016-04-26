@@ -7,8 +7,9 @@ public class Colonel extends Moving {
     private boolean isBlue;
     private Hand hand;
     Wormhole worm;
+    Program map;
     
-    public Colonel(Field field,Direction dir,int numberOfZPM,int w,Wormhole worm){
+    public Colonel(Field field,Direction dir,int numberOfZPM,int w,Wormhole worm,Program p){
         this.currentPos = field;
         this.dir = dir;
         isBlue = false;
@@ -16,6 +17,7 @@ public class Colonel extends Moving {
         hand = new Hand(this);
         weight=w;
         this.worm=worm;
+        map = p;
     }
     public void shoot(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
@@ -56,6 +58,12 @@ public class Colonel extends Moving {
     }
     public void win(){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
+    }
+    @Override
+    public String debugString() {
+    	if(this==map.oneil) return "o";
+    	else return "j";
+    	
     }
 
 }

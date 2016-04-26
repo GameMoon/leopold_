@@ -9,4 +9,9 @@ public class Wall extends Item{
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), bullet, dir);
         bullet.setBlocked(true);
     }
+    @Override
+    public String debugString() {
+    	
+    	return "W";
+    }
 }

@@ -208,7 +208,7 @@ public class SeqTester {
         canPrint = true;
     }
     private static void openDoor(){
-        Door door = new Door();
+        Door door = new Door(1);
         door.open();
         game.getMap()[0][1].add(door);
         canPrint = true;
@@ -221,7 +221,7 @@ public class SeqTester {
         canPrint = true;
     }
     private static void closedDoor(){
-        Door door = new Door();
+        Door door = new Door(1);
         door.close();
         game.getMap()[0][1].add(door);
         canPrint = true;
@@ -237,5 +237,11 @@ public class SeqTester {
     private static void flyingBullet(){
         game.getMap()[0][5].add(new Wall());
         canPrint = true;
+    }
+    public static void main(String[] args){
+    	//SeqTester.init();
+    	Program p= new Program();
+    	p.mapLoader();
+    	p.Result();
     }
 }

@@ -1,6 +1,7 @@
 package szoftlab;
 
 
+import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -10,13 +11,13 @@ public class Program {
     public static int mapSizeX = 10;
     public static int mapSizeY = 10;
     public Field[][] map;
-    public Wormhole wormhole = new Wormhole();
     public Colonel oneil;
     public Colonel jaffa;
     Replikator repli;
     public Program(){
     	//initMap();
-       oneil = new Colonel(map[0][0],Item.Direction.down,10,10,wormhole);
+      // oneil = new Colonel(map[0][0],Item.Direction.down,10,10,wormhole,this);
+       
     }
     public void mapLoader() 
 	{
@@ -58,11 +59,11 @@ public class Program {
 							map[i + 1][j + 1].add(new PortalWall(map[i + 1][j + 1]));
 							break;
 						case ('<') :
-							Door door = new Door();
-							map[i + 1][j + 1].add(door);
 							k++;
 							String xD = line[j].substring(k).split(">")[0];
 							doorsIndex.add(Integer.parseInt(xD));
+							Door door = new Door(doorsIndex.get(doorsIndex.size()-1));
+							map[i + 1][j + 1].add(door);
 							doors.add(door);
 							k += xD.length();
 							break;
@@ -102,11 +103,11 @@ public class Program {
 						switch(line[j].charAt(k))
 						{
 						case ('O') :
-							oneil = new Colonel(map[i + 1][j + 1], Direction.up, 3, col1W,new Wormhole());
+							oneil = new Colonel(map[i + 1][j + 1], Direction.up, 3, col1W,new Wormhole(Color.BLUE, Color.YELLOW),this);
 							map[i + 1][j + 1].add(oneil);
 							break;
 						case ('J') :
-							jaffa = new Colonel(map[i + 1][j + 1], Direction.up, 3, col2W,new Wormhole());
+							jaffa = new Colonel(map[i + 1][j + 1], Direction.up, 3, col2W,new Wormhole(Color.RED, Color.GREEN),this);
 							map[i + 1][j + 1].add(jaffa);
 							break;
 						case ('R') :
@@ -140,6 +141,79 @@ public class Program {
 		}
 		
 	}
+    public void Result() {
+    	for(int i=0;i< mapSizeX - 2;i++){
+    		for(int j=0; j<mapSizeY - 2;j++){
+    			String aString = map[i + 1][j + 1].getItemsString();
+    			String fieldType = "T";
+    			int zpmCount = 0;
+    			int boxCount = 0;
+    			char oneilHere = 'N', jaffaHere = 'N', repliHere = 'N';
+    			char portalColor = 'n', portalDir = '-';
+    			for(int k = 0; k < aString.length(); k++)
+    			{
+    				String number;
+    				switch (aString.charAt(k))
+    				{
+    				case 'R':
+    					fieldType = "R";
+    					break;
+    				case 'W':
+    					fieldType = "W";
+    					break;
+    				case 'P':
+    					fieldType = "P";
+    					break;
+    				case '<':
+    					k++;
+    					number = aString.substring(k).split(">")[0];
+    					fieldType = "<".concat(number).concat(">");
+    					k += number.length();
+    					break;
+    				case '+':
+    					k += 2;
+    					number = aString.substring(k).split(">")[0];
+    					fieldType = "+<".concat(number).concat(">");
+    					k += number.length();
+    					break;
+    				case '-':
+    					k += 2;
+    					number = aString.substring(k).split(">")[0];
+    					fieldType = "-<".concat(number).concat(">");
+    					k += number.length();
+    					break;
+    				case 'Z':
+    					zpmCount++;
+    					break;
+    				case 'B':
+    					boxCount++;
+    					break;
+    				case 'o':
+    					oneilHere = 'I';
+    					break;
+    				case 'j':
+    					jaffaHere = 'I';
+    					break;
+    				case 'r':
+    					repliHere = 'I';
+    					break;
+    				case 'p':
+    				case 'z':
+    				case 'k':
+    				case 's':
+    					portalColor = aString.charAt(k);
+    					portalDir = aString.charAt(++k);
+    					break;
+    				default:
+    					break;
+    				}
+    			}
+    			String finalString="<"+fieldType+","+zpmCount+","+boxCount+","+jaffaHere+","+oneilHere+","+repliHere+","+portalColor+","+portalDir+">";
+    			System.out.print(finalString);
+    		}
+    		System.out.println();
+    	}
+    }
     private void initMap(){
         //Generate fields
         for(int posX = 0;posX<mapSizeX;posX++){
@@ -170,15 +244,8 @@ public class Program {
     };
     public Field[][] getMap(){ return map;}
 
-public static void Main(String[] args){
-//SeqTester.init();
-	/*mapLoader();
-	for(int i;i< mapSizeX;i++){
-		for(int j; j<mapSizeY;j++){
-			
-		}
-	}*/
-}
+
+
 
 
 }

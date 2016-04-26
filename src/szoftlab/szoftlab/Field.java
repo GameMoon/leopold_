@@ -3,7 +3,7 @@ package szoftlab;
 import java.util.ArrayList;
 
 public class Field {
-    private ArrayList<Item> items = new ArrayList<>();
+	private ArrayList<Item> items = new ArrayList<>();
     private Field[] neighbor = new Field[4];
     public void clearItems(){
         items.clear();
@@ -60,5 +60,16 @@ public class Field {
         for(int k = 0;k<items.size();k++){
             if(items.get(k) != null) items.get(k).release(item);
         }
+    }
+    
+    public String getItemsString()
+    {
+    	String re = "";
+    	for(int i = 0; i < items.size(); i++)
+    	{
+    		String lol = items.get(i).debugString();
+    		re += lol;
+    	}
+    	return re;
     }
 }

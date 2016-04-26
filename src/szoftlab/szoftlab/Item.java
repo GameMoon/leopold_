@@ -11,4 +11,6 @@ abstract public class Item {
     public void collide(Hand hand,Direction dir){}
     public void collide(Box box,Direction dir){}
     public void release(Item i){}
+    
+    public String debugString() {return "";}
 }

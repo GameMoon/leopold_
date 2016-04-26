@@ -6,4 +6,9 @@ public class Rift extends Item{
        colonel.setBlocked(true);
        colonel.die();
     }
+    @Override
+    public String debugString() {
+    	
+    	return "R";
+    }
 }

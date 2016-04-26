@@ -11,5 +11,10 @@ public class PortalWall extends Wall {
         bullet.getWormhole().open(field, dir); //dir ellentétes
         bullet.setBlocked(true);
     }
+    @Override
+    public String debugString() {
+    	
+    	return "P";
+    }
 }
 //10-12

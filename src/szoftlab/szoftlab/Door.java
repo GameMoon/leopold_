@@ -1,7 +1,14 @@
 package szoftlab;
 
 public class Door extends Item{
-    private boolean status = true;
+    private boolean status = false; //true is open
+    private int serialnumber;
+    public Door(int s){
+    	serialnumber=s;
+    }
+    public int Getserialnumber(){
+    	return serialnumber;
+    }
     public void open(){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         status = true;
@@ -17,5 +24,12 @@ public class Door extends Item{
     public void collide(Bullet bullet,Direction dir){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), bullet, dir);
         if(!status) bullet.setBlocked(true);
+    }
+    @Override
+    public String debugString() {
+    	if(status){
+    	return "+<"+serialnumber+">";
+    	}
+    	else return "<"+serialnumber+">";
     }
 }

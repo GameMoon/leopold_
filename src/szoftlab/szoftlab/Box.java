@@ -14,4 +14,9 @@ public class Box extends Item{
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), hand, dir);
         hand.grab(this);
     }
+     @Override
+    public String debugString() {
+    	
+    	return "B";
+    }
 }
