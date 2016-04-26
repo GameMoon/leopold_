@@ -22,4 +22,8 @@ public class Hand extends Item{
         colonel.currentPos.getNeighbor(colonel.dir).enter(box, colonel.dir);
         return box;
     }
+    public boolean hasBox(){
+        if(box != null) return true;
+        else return false;
+    }
 }

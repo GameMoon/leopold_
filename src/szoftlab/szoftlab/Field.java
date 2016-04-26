@@ -35,6 +35,13 @@ public class Field {
         }
         colonel.relocate(this);
     }
+    public void enter(Replikator replikator, Item.Direction dir){
+        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), replikator, dir);
+        for(int k = 0;k<items.size();k++){
+            if(items.get(k) != null) items.get(k).collide(replikator,dir);
+        }
+        replikator.relocate(this);
+    }
     public void enter(Bullet bullet, Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), bullet, dir);
         for(int k = 0;k<items.size();k++){

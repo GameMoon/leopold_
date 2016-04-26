@@ -5,7 +5,7 @@ public class Colonel extends Moving {
     private int score;
     private int maxscore;
     private boolean isBlue;
-    private Hand hand;
+    public Hand hand;
     Wormhole worm;
     Program map;
     
@@ -49,7 +49,7 @@ public class Colonel extends Moving {
     public void addScore(ZPM zpm){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), zpm);
         score++;
-        //Új ZPM keletkezik, ha felvesz két ZPM-et
+        //ï¿½j ZPM keletkezik, ha felvesz kï¿½t ZPM-et
         if(score%2==0){
         // Macht etwas....
         }

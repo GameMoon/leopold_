@@ -238,10 +238,4 @@ public class SeqTester {
         game.getMap()[0][5].add(new Wall());
         canPrint = true;
     }
-    public static void main(String[] args){
-    	//SeqTester.init();
-    	Program p= new Program();
-    	p.mapLoader();
-    	p.Result();
-    }
 }
