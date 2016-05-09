@@ -1,5 +1,8 @@
 package szoftlab;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Colonel extends Moving {
     public Bullet bullet;
     private int score;
@@ -18,6 +21,19 @@ public class Colonel extends Moving {
         weight=w;
         this.worm=worm;
         map = p;
+        try {
+            drawable.loadCharacter(new File("images/player.png").getCanonicalPath(),dir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void rotate(Direction dir){
+        this.dir = dir;
+        try {
+            drawable.loadCharacter(new File("images/player.png").getCanonicalPath(),dir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void shoot(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
@@ -30,8 +46,7 @@ public class Colonel extends Moving {
     }
     public void changeColor(){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
-        if(isBlue) isBlue = false;
-        else isBlue = true;
+       worm.changeColor();
     }
     public void pickUp(){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
@@ -41,10 +56,13 @@ public class Colonel extends Moving {
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         currentPos.getNeighbor(dir).enter(hand,dir);
         hand.free();
+      
+        
     }
     public void die(){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
-       hand.die();
+       currentPos.remove(this);
+       currentPos=null;
     }
     public void addScore(ZPM zpm){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), zpm);
@@ -63,7 +81,7 @@ public class Colonel extends Moving {
     public String debugString() {
     	if(this==map.oneil) return "o";
     	else return "j";
-    	
+
     }
 
 }

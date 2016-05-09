@@ -1,10 +1,22 @@
 package szoftlab;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Field {
 	private ArrayList<Item> items = new ArrayList<>();
     private Field[] neighbor = new Field[4];
+    public Drawable drawable = new Drawable();
+
+    public Field(){
+        try {
+            drawable.loadImage(new File("images/floor.bmp").getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void clearItems(){
         items.clear();
     }
@@ -27,6 +39,9 @@ public class Field {
     public void remove(Item item){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), item);
         items.remove(item);
+        for(int i=0; i<items.size();i++){
+        	items.get(i).release(item);
+        }
     }
     public void enter(Colonel colonel, Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), colonel, dir);

@@ -22,6 +22,7 @@ public class Scale extends Item {
         	door.open();
         }
     }
+    @Override
     public void release(Item i){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         currentWeight-=i.getWeight();

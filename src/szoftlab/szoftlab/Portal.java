@@ -62,16 +62,16 @@ public class Portal extends Item{
     	switch (dir)
     	{
     	case up:
-    		re.concat("é");
+    		re+="é";
     		break;
     	case left:
-    		re.concat("n");
+    		re+="n";
     		break;
     	case right:
-    		re.concat("k");
+    		re+="k";
     		break;
     	case down:
-    		re.concat("d");
+    		re+="d";
     		break;
     	}
     	return re;

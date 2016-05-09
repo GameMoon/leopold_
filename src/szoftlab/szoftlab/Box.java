@@ -16,7 +16,7 @@ public class Box extends Item{
     }
      @Override
     public String debugString() {
-    	
+
     	return "B";
     }
 }

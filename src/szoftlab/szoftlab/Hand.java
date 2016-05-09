@@ -20,6 +20,7 @@ public class Hand extends Item{
     public Box free(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         colonel.currentPos.getNeighbor(colonel.dir).enter(box, colonel.dir);
+        box=null;
         return box;
     }
     public boolean hasBox(){

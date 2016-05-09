@@ -8,8 +8,10 @@ import java.util.Random;
 
 import szoftlab.Item.Direction;
 
+import javax.swing.*;
+
 public class Program {
-    public static int mapSizeX = 10;
+    public static int mapSizeX = 12;
     public static int mapSizeY = 10;
     public Field[][] map;
     public Colonel oneil;
@@ -17,9 +19,20 @@ public class Program {
     public Replikator replikator;
     public Program(){
         replikator = null;
-    	//initMap();
-        //oneil = new Colonel(map[0][0],Item.Direction.down,10,10,wormhole,this);
+        initMap();
+        oneil = new Colonel(map[1][1],Item.Direction.down,10,10,new Wormhole(Color.BLUE,Color.orange),this);
+        generateTestMap();
        
+    }
+    public void generateTestMap(){
+        for(int x = 0;x < mapSizeX;x++){
+            for(int y = 0;y < mapSizeY;y++){
+                if(x == 0 || y == 0 || y == mapSizeY-1 || x == mapSizeX-1){
+                    map[x][y].add(new Wall());
+                }
+            }
+        }
+        map[1][1].add(oneil);
     }
     public void mapLoader(String mapName)
 	{
@@ -230,6 +243,7 @@ public class Program {
         return output;
     }
     private void initMap(){
+        map = new Field[mapSizeX][mapSizeY];
         //Generate fields
         for(int posX = 0;posX<mapSizeX;posX++){
             for(int posY =0;posY<mapSizeY;posY++) {
@@ -237,23 +251,15 @@ public class Program {
             }
         }
         //Init field neighbor's
-        for(int posX = 0;posX<mapSizeX;posX++){
-            for(int posY =0;posY<mapSizeY;posY++) {
-                if(posX-1 >= 0) map[posX][posY].setNeighbor(map[posX-1][posY],Item.Direction.left);
-                if(posX+1 < mapSizeX) map[posX][posY].setNeighbor(map[posX+1][posY],Item.Direction.right);
-                if(posY-1 >= 0) map[posX][posY].setNeighbor(map[posX][posY-1],Item.Direction.up);
-                if(posY+1 < mapSizeY) map[posX][posY].setNeighbor(map[posX][posY+1],Item.Direction.down);
+        for(int posY = 0;posY<mapSizeX;posY++){
+            for(int posX =0;posX<mapSizeY;posX++) {
+                if(posY-1 >= 0) map[posY][posX].setNeighbor(map[posY-1][posX],Item.Direction.up);
+                if(posY+1 < mapSizeX) map[posY][posX].setNeighbor(map[posY+1][posX],Item.Direction.down);
+                if(posX-1 >= 0) map[posY][posX].setNeighbor(map[posY][posX-1],Item.Direction.left);
+                if(posX+1 < mapSizeY) map[posY][posX].setNeighbor(map[posY][posX+1],Item.Direction.right);
             }
         }
     }
-    public void clearMap(){
-        for(int posX = 0;posX<mapSizeX;posX++){
-            for(int posY =0;posY<mapSizeY;posY++) {
-                map[posX][posY].clearItems();
-            }
-        }
-    }
-    //�J ZPM l�trehoz�sa
     public void createRandomZPM(){
     	Random rdm = new Random();
         int x = rdm.nextInt(mapSizeX-1);
@@ -267,7 +273,7 @@ public class Program {
         field.add(new ZPM());
     };
     public Field[][] getMap(){ return map;}
-    public static void main(String[] args){
+    public void prototester(){
         Program game = new Program();
 
         BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
@@ -296,10 +302,14 @@ public class Program {
                 }
             }
             else if(line[0].equals("turn")){
-                if(player.dir == Item.Direction.up) player.rotate(Item.Direction.right);
-                else if(player.dir == Item.Direction.right) player.rotate(Item.Direction.down);
-                else if(player.dir == Item.Direction.down) player.rotate(Item.Direction.left);
-                else if(player.dir == Item.Direction.left) player.rotate(Item.Direction.up);
+                if(player.dir == Item.Direction.up && line[1].equals("right")) player.rotate(Item.Direction.right);
+                else if(player.dir == Item.Direction.up && line[1].equals("left")) player.rotate(Item.Direction.left);
+                else if(player.dir == Item.Direction.right && line[1].equals("right")) player.rotate(Item.Direction.down);
+                else if(player.dir == Item.Direction.right && line[1].equals("left")) player.rotate(Item.Direction.up);
+                else if(player.dir == Item.Direction.down && line[1].equals("right")) player.rotate(Item.Direction.left);
+                else if(player.dir == Item.Direction.down && line[1].equals("left")) player.rotate(Item.Direction.right);
+                else if(player.dir == Item.Direction.left&& line[1].equals("right")) player.rotate(Item.Direction.up);
+                else if(player.dir == Item.Direction.left && line[1].equals("left")) player.rotate(Item.Direction.down);
             }
             else if(line[0].equals("setrandom")){
 				if(line[1].equals("replicator")) game.replikator.setRandom(Boolean.parseBoolean(line[2]));
@@ -361,4 +371,24 @@ public class Program {
 
         }
     }
+	public static void main(String[] args){
+		Program game = new Program();
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				initGUI(game);
+			}
+		});
+	}
+	private static void initGUI(Program game){
+		JFrame window = new JFrame("leopold_");
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        View view = new View(game);
+        view.addKeyListener(new Controller(game,view));
+        view.setFocusable(true);
+
+		window.add(view);
+		window.pack();
+		window.setVisible(true);
+	}
 }
