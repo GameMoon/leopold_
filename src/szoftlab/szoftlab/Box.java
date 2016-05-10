@@ -14,6 +14,9 @@ public class Box extends Item{
     public void collide(Replikator replikator,Direction dir){
         replikator.setBlocked(true);
     }
+    public void collide(Colonel colonel,Direction dir){
+        colonel.setBlocked(true);
+    }
     public void destroy(){
         currentPos.remove(this);
         currentPos = startPos;
