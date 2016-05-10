@@ -3,20 +3,24 @@ package szoftlab;
 public class Box extends Item{
 	Field startPos;
 	Field currentPos;
-	public void destroy(){
-       SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
-    }
     public Box(int w,Field f ){
     	weight=w;
     	startPos=currentPos=f;
+        drawable.loadImage("images/box.png");
     }
     public void collide(Hand hand,Direction dir){
-       SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), hand, dir);
         hand.grab(this);
     }
-     @Override
+    public void collide(Replikator replikator,Direction dir){
+        replikator.setBlocked(true);
+    }
+    public void destroy(){
+        currentPos.remove(this);
+        currentPos = startPos;
+        currentPos.add(this);
+    }
+    @Override
     public String debugString() {
-
     	return "B";
     }
 }

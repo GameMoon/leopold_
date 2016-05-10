@@ -11,11 +11,7 @@ public class Field {
     public Drawable drawable = new Drawable();
 
     public Field(){
-        try {
-            drawable.loadImage(new File("images/floor.bmp").getCanonicalPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        drawable.loadImage("images/floor.png");
     }
     public void clearItems(){
         items.clear();
@@ -49,6 +45,7 @@ public class Field {
            if(items.get(k) != null) items.get(k).collide(colonel,dir);
         }
         colonel.relocate(this);
+        colonel.blocked = false;
     }
     public void enter(Replikator replikator, Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), replikator, dir);
@@ -56,6 +53,7 @@ public class Field {
             if(items.get(k) != null) items.get(k).collide(replikator,dir);
         }
         replikator.relocate(this);
+        replikator.setBlocked(false);
     }
     public void enter(Bullet bullet, Item.Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), bullet, dir);
@@ -71,14 +69,13 @@ public class Field {
         }
     }
     public void enter(Box box, Item.Direction dir){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), box, dir);
         this.add(box);
+        box.currentPos = this;
         for(int k = 0;k<items.size();k++){
             if(items.get(k) != null) items.get(k).collide(box,dir);
         }
     }
     public void exit(Item item,Item.Direction dir){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), item, dir);
         for(int k = 0;k<items.size();k++){
             if(items.get(k) != null) items.get(k).release(item);
         }

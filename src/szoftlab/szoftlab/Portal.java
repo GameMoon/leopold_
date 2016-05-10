@@ -15,14 +15,19 @@ public class Portal extends Item{
         this.dir = dir;
         this.wormhole = wormhole;
         this.color = color;
+        drawable.loadSprite("images/portals.png",64,false);
     }
     public void open(){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         field.add(this);
+        drawable.visible = true;
+        if(color == Color.BLUE) drawable.setState(dir,0);
+        else if(color == Color.ORANGE) drawable.setState(dir,1);
+        else if(color == Color.RED) drawable.setState(dir,2);
+        else if(color == Color.GREEN) drawable.setState(dir,3);
     }
     public void close(){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         field.remove(this);
+        drawable.visible = false;
     }
     public void collide(Colonel colonel,Direction dir){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), colonel, dir);
@@ -62,7 +67,7 @@ public class Portal extends Item{
     	switch (dir)
     	{
     	case up:
-    		re+="é";
+    		re+="ï¿½";
     		break;
     	case left:
     		re+="n";

@@ -1,39 +1,30 @@
 package szoftlab;
 
-import java.io.File;
-import java.io.IOException;
-
 public class Colonel extends Moving {
     public Bullet bullet;
-    private int score;
-    private int maxscore;
+    public int score;
+    public int maxscore;
     private boolean isBlue;
+    private Field startField;
     public Hand hand;
     Wormhole worm;
     Program map;
-    
-    public Colonel(Field field,Direction dir,int numberOfZPM,int w,Wormhole worm,Program p){
+    public int spriteType = 0;
+    public Colonel(Field field,Direction dir,int numberOfZPM,int weight,Wormhole worm,Program p){
         this.currentPos = field;
         this.dir = dir;
         isBlue = false;
         maxscore = numberOfZPM;
         hand = new Hand(this);
-        weight=w;
+        this.weight=weight;
         this.worm=worm;
         map = p;
-        try {
-            drawable.loadCharacter(new File("images/player.png").getCanonicalPath(),dir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        startField = field;
+        drawable.loadSprite("images/player.png",32,true);
     }
     public void rotate(Direction dir){
         this.dir = dir;
-        try {
-            drawable.loadCharacter(new File("images/player.png").getCanonicalPath(),dir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        drawable.setState(dir,spriteType);
     }
     public void shoot(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
@@ -41,7 +32,7 @@ public class Colonel extends Moving {
     }
     public void step(){
         SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
-        currentPos.exit(this,dir);
+       // currentPos.exit(this,dir);
         currentPos.getNeighbor(dir).enter(this, dir);
     }
     public void changeColor(){
@@ -56,26 +47,29 @@ public class Colonel extends Moving {
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
         currentPos.getNeighbor(dir).enter(hand,dir);
         hand.free();
-      
-        
     }
     public void die(){
        SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
+        hand.die();
        currentPos.remove(this);
-       currentPos=null;
+       currentPos = startField;
+       score = 0;
+       startField.add(this);
     }
     public void addScore(ZPM zpm){
-       SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), zpm);
         score++;
-        //�j ZPM keletkezik, ha felvesz k�t ZPM-et
         if(score%2==0){
             map.createRandomZPM();
         }
         if(score == maxscore) win();
-        currentPos.remove(zpm);
+        currentPos.remove(this);
+
+    }
+    public void collide(Replikator replikator,Direction dir){
+        replikator.setBlocked(true);
     }
     public void win(){
-       SeqTester.printMethod(this, Thread.currentThread().getStackTrace());
+
     }
     @Override
     public String debugString() {

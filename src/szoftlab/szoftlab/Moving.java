@@ -16,7 +16,6 @@ public class Moving extends Item{
             currentPos = newField;
             currentPos.add(this);
         }
-        blocked = false;
     }
     public void rotate(Direction dir){
         this.dir = dir;

@@ -158,7 +158,7 @@ public class SeqTester {
 
     }
     private static void pickUpZPM(){
-        game.getMap()[0][1].add(new ZPM());
+        game.getMap()[0][1].add(new ZPM(game.getMap()[0][1]));
         canPrint = true;
     }
     private static void putDown(){

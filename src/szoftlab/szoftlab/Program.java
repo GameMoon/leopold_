@@ -11,28 +11,46 @@ import szoftlab.Item.Direction;
 import javax.swing.*;
 
 public class Program {
-    public static int mapSizeX = 12;
-    public static int mapSizeY = 10;
+    public int mapSizeX = 12;
+    public int mapSizeY = 10;
     public Field[][] map;
     public Colonel oneil;
     public Colonel jaffa;
     public Replikator replikator;
+    public boolean isRunning = true;
     public Program(){
         replikator = null;
         initMap();
-        oneil = new Colonel(map[1][1],Item.Direction.down,10,10,new Wormhole(Color.BLUE,Color.orange),this);
-        generateTestMap();
-       
+       // oneil = new Colonel(map[1][1],Item.Direction.down,2,10,new Wormhole(Color.BLUE,Color.ORANGE),this);
+       // jaffa = new Colonel(map[9][8],Item.Direction.up,2,10,new Wormhole(Color.RED,Color.GREEN),this);
+        //replikator = new Replikator(map[2][7]);
+       // generateTestMap();
+       // mapLoader("maps/test29");
     }
     public void generateTestMap(){
+
         for(int x = 0;x < mapSizeX;x++){
             for(int y = 0;y < mapSizeY;y++){
                 if(x == 0 || y == 0 || y == mapSizeY-1 || x == mapSizeX-1){
-                    map[x][y].add(new Wall());
+                   if(x % 2 == 0 || y % 2 == 0) map[x][y].add(new Wall());
+                    else map[x][y].add(new PortalWall(map[x][y]));
                 }
             }
         }
+        map[2][7].add(replikator);
         map[1][1].add(oneil);
+        map[9][8].add(jaffa);
+        Door door = new Door(1);
+        Scale scale = new Scale(1);
+        scale.setDoor(door);
+        map[5][5].add(door);
+        map[6][7].add(scale);
+        map[8][2].add(new PortalWall(map[8][2]));
+        map[3][7].add(new PortalWall(map[3][7]));
+        map[4][2].add(new Box(3,map[4][2]));
+        map[5][3].add(new Rift());
+        map[8][8].add(new ZPM(map[8][8]));
+        map[8][1].add(new ZPM(map[8][1]));
     }
     public void mapLoader(String mapName)
 	{
@@ -41,8 +59,8 @@ public class Program {
 			BufferedReader fr1 = new BufferedReader(new InputStreamReader(new FileInputStream(mapName+"map.txt")));
 			int n = Integer.parseInt(fr1.readLine()) + 2;
 			map = new Field[n][n];
-			mapSizeX = n;
-			mapSizeY = n;
+			this.mapSizeX = n;
+			this.mapSizeY = n;
 			initMap();
 			ArrayList<Integer> scalesIndex = new ArrayList<Integer>();
 			ArrayList<Scale> scales = new ArrayList<Scale>();
@@ -119,10 +137,14 @@ public class Program {
 						{
 						case ('O') :
 							oneil = new Colonel(map[i + 1][j + 1], Direction.up, 3, col1W,new Wormhole(Color.BLUE, Color.YELLOW),this);
+                            oneil.spriteType = 4;
+                            oneil.drawable.setState(oneil.dir,4);
 							map[i + 1][j + 1].add(oneil);
 							break;
 						case ('J') :
 							jaffa = new Colonel(map[i + 1][j + 1], Direction.up, 3, col2W,new Wormhole(Color.RED, Color.GREEN),this);
+                            jaffa.spriteType = 7;
+                            jaffa.drawable.setState(jaffa.dir,7);
 							map[i + 1][j + 1].add(jaffa);
 							break;
 						case ('R') :
@@ -133,7 +155,7 @@ public class Program {
 							map[i + 1][j + 1].add(new Box(boxW, map[i + 1][j + 1]));
 							break;
 						case ('Z') :
-							map[i + 1][j + 1].add(new ZPM());
+							map[i + 1][j + 1].add(new ZPM(map[i + 1][j + 1]));
 							break;
 						default:
 							break;
@@ -270,7 +292,7 @@ public class Program {
             y = rdm.nextInt(mapSizeY-1);
            field = map[x][y];
        }
-        field.add(new ZPM());
+        field.add(new ZPM(field));
     };
     public Field[][] getMap(){ return map;}
     public void prototester(){
@@ -345,7 +367,7 @@ public class Program {
                     field.add(new Box(Integer.parseInt(line[4]),field));
                 }
                 else if(type.equals("ZPM")){
-                    field.add(new ZPM());
+                    field.add(new ZPM(field));
                 }
                 else if(type.equals("Rift")){
                     field.add(new Rift());
@@ -373,22 +395,34 @@ public class Program {
     }
 	public static void main(String[] args){
 		Program game = new Program();
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				initGUI(game);
-			}
-		});
+        View view;
+        view = initGUI(game);
+        while(game.isRunning){
+            game.replikator.step();
+            view.repaint();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 	}
-	private static void initGUI(Program game){
+	private static View initGUI(Program game){
+
 		JFrame window = new JFrame("leopold_");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        View view = new View(game);
+        String mapName = (String)JOptionPane.showInputDialog(window, "","Type the Map Name",
+                JOptionPane.PLAIN_MESSAGE, null, null, "");
+        game.mapLoader("maps/"+mapName);
+        View view = new View(game,window);
         view.addKeyListener(new Controller(game,view));
         view.setFocusable(true);
 
 		window.add(view);
 		window.pack();
 		window.setVisible(true);
+
+        return view;
 	}
 }
