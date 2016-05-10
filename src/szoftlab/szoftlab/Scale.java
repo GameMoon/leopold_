@@ -12,11 +12,9 @@ public class Scale extends Item {
         drawable.loadImage("images/scale.png");
     }
     public void collide(Colonel colonel,Direction dir){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), colonel, dir);
         press(colonel);
     }
     public void collide(Box box,Direction dir){
-        SeqTester.printMethod(this, Thread.currentThread().getStackTrace(), box, dir);
         press(box);
     }
     public void collide(Replikator replikator,Direction dir){
