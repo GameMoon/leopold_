@@ -21,11 +21,12 @@ public class Program {
     public Program(){
         replikator = null;
         initMap();
-       // oneil = new Colonel(map[1][1],Item.Direction.down,2,10,new Wormhole(Color.BLUE,Color.ORANGE),this);
-       // jaffa = new Colonel(map[9][8],Item.Direction.up,2,10,new Wormhole(Color.RED,Color.GREEN),this);
-        //replikator = new Replikator(map[2][7]);
-       // generateTestMap();
-       // mapLoader("maps/test29");
+		/*
+        oneil = new Colonel(map[1][1],Item.Direction.down,2,10,new Wormhole(Color.BLUE,Color.ORANGE),this);
+        jaffa = new Colonel(map[9][8],Item.Direction.up,2,10,new Wormhole(Color.RED,Color.GREEN),this);
+        replikator = new Replikator(map[2][7]);
+        generateTestMap();*/
+
     }
     public void generateTestMap(){
 
@@ -135,8 +136,8 @@ public class Program {
 					{
 						switch(line[j].charAt(k))
 						{
-						case ('O') :
-							oneil = new Colonel(map[i + 1][j + 1], Direction.up, 3, col1W,new Wormhole(Color.BLUE, Color.YELLOW),this);
+							case ('O') :
+							oneil = new Colonel(map[i + 1][j + 1], Direction.up, 3, col1W,new Wormhole(Color.BLUE, Color.ORANGE),this);
                             oneil.spriteType = 4;
                             oneil.drawable.setState(oneil.dir,4);
 							map[i + 1][j + 1].add(oneil);

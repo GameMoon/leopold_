@@ -16,6 +16,9 @@ public class Wall extends Item{
     public void collide(Bullet bullet,Direction dir){
         bullet.setBlocked(true);
     }
+    public void collide(Hand hand,Direction dir){
+        hand.setBlocked(true);
+    }
     @Override
     public String debugString() {
     	

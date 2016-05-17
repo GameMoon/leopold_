@@ -1,6 +1,6 @@
 package szoftlab;
 
-public class Hand extends Item{
+public class Hand extends Moving{
     public Box box;
     private Colonel colonel;
     public Hand(Colonel colonel){
@@ -13,12 +13,17 @@ public class Hand extends Item{
         }
     }
     public void grab(Box box){
-        this.box = box;
-        colonel.currentPos.getNeighbor(colonel.dir).remove(box);
+        if(this.box == null) {
+            this.box = box;
+            colonel.currentPos.getNeighbor(colonel.dir).remove(box);
+        }
     }
     public Box free(){
-        colonel.currentPos.getNeighbor(colonel.dir).enter(box, colonel.dir);
-        box=null;
+        if(!blocked){
+            colonel.currentPos.getNeighbor(colonel.dir).enter(box, colonel.dir);
+            box=null;
+        }
+        setBlocked(false);
         return box;
     }
     public boolean hasBox(){
